@@ -1,6 +1,6 @@
 import React from "react";
 
-function MainCard() {
+function MainCard({ setIsOpenEdit,setIsOpenDelete }) {
   return (
     <div className="w-[560px] h-[330px] border border-zinc-300 rounded-[5px] mx-[10px] my-[20px]">
       <div className="bg-[#E7E7E7] p-[30px] h-[80%]">
@@ -15,10 +15,20 @@ function MainCard() {
         </p>
       </div>
       <div className="flex bg-zinc-300 justify-end h-[20%] items-center">
-        <button className="bg-yellow-400 py-2 px-5 rounded-[5px] font-bold hover:bg-yellow-500">
+        <button
+          className="bg-yellow-400 py-2 px-5 rounded-[5px] font-bold hover:bg-yellow-500"
+          onClick={() => {
+            setIsOpenEdit(true);
+          }}
+        >
           Edit
         </button>
-        <button className="bg-yellow-400 py-2 px-5 rounded-[5px] font-bold mx-2 hover:bg-yellow-500">
+        <button
+          className="bg-yellow-400 py-2 px-5 rounded-[5px] font-bold mx-2 hover:bg-yellow-500"
+          onClick={() => {
+            setIsOpenDelete(true);
+          }}
+        >
           Delete
         </button>
       </div>
