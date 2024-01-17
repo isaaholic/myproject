@@ -4,6 +4,7 @@ import MainCard from "./components/MainCard";
 import CreateCard from "./components/CreateCard";
 import EditCard from "./components/EditCard";
 import DeleteCard from "./components/DeleteCard";
+import Form from "./components/Form";
 
 export default function Mainpage({ email, setAuthorized }) {
   const [isOpenCreate, setIsOpenCreate] = useState(false);
@@ -14,14 +15,14 @@ export default function Mainpage({ email, setAuthorized }) {
     <>
       <Navigation email={email} setAuthorized={setAuthorized} />
       <button
-        className="bg-yellow-400 py-3 px-10 font-bold rounded-[8px] hover:bg-yellow-500 ml-[68px] mt-[20px]"
+        className="bg-yellow-400 py-3 px-10 font-bold rounded-[8px] hover:bg-yellow-500 ml-[20px] sm:ml-[68px] mt-[20px]"
         onClick={() => {
           setIsOpenCreate(true);
         }}
       >
         Create card
       </button>
-      <div className="flex flex-wrap px-[58px]">
+      <div className="flex flex-wrap px-[10px] sm:px-[58px]">
         <MainCard
           setIsOpenDelete={setIsOpenDelete}
           setIsOpenEdit={setIsOpenEdit}
@@ -59,6 +60,7 @@ export default function Mainpage({ email, setAuthorized }) {
           <DeleteCard setIsOpenDelete={setIsOpenDelete} />
         </div>
       )}
+      {/* <Form /> */}
     </>
   );
 }

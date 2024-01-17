@@ -4,7 +4,7 @@ function DeleteCard({ setIsOpenDelete }) {
   return (
     <form
       action=""
-      className="flex flex-col items-center w-[700px] h-[200px] mx-7 justify-center rounded-[13px] bg-white"
+      className="flex flex-col items-center w-screen h-screen sm:w-[700px] sm:h-[200px] sm:mx-7 justify-center sm:rounded-[13px] bg-white"
     >
       <div className="w-[100%]">
         <button

@@ -2,10 +2,10 @@ import React from "react";
 
 function MainCard({ setIsOpenEdit,setIsOpenDelete }) {
   return (
-    <div className="w-[560px] h-[330px] border border-zinc-300 rounded-[5px] mx-[10px] my-[20px]">
+    <div className="w-[560px] sm:h-[330px] border border-zinc-300 rounded-[5px] mx-[10px] my-[20px]">
       <div className="bg-[#E7E7E7] p-[30px] h-[80%]">
-        <h1 className="text-3xl font-bold">Card title</h1>
-        <p className="my-4 text-justify font-medium">
+        <h1 className="text-xl sm:text-3xl font-bold">Card title</h1>
+        <p className="my-4 text-justify text-xs sm:text-base font-medium">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
           nihil possimus harum facere nesciunt tempore nobis illo enim adipisci
           repudiandae non voluptatem unde aperiam, deserunt odio alias pariatur
