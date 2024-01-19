@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-function CreateCard({ email, setCards, setOpenedModal }) {
+function CreateCard({ email, setCards, dispatch }) {
   const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(e.target.value)
 
     setFormData((prevForm) => ({
       ...prevForm,
@@ -19,7 +18,7 @@ function CreateCard({ email, setCards, setOpenedModal }) {
   const createCard = (e) => {
     e.preventDefault();
     setCards((prevValue) => [...prevValue, formData]);
-    setOpenedModal("");
+    dispatch({ type: "" });
   };
 
   return (
@@ -32,7 +31,7 @@ function CreateCard({ email, setCards, setOpenedModal }) {
         <button
           className="bg-red-600 w-3 h-3 rounded-full float-right my-0 me-5"
           onClick={() => {
-            setOpenedModal("");
+            dispatch({ type: "" });
           }}
         ></button>
       </div>
@@ -60,7 +59,7 @@ function CreateCard({ email, setCards, setOpenedModal }) {
           <button
             className="border border-zinc-300 py-2 px-5 rounded-[10px] font-bold hover:bg-[#DFDFDF]"
             onClick={() => {
-              setOpenedModal("");
+              dispatch({ type: "" });
             }}
           >
             Close

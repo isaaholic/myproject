@@ -1,12 +1,12 @@
 import React from "react";
 
-function DeleteCard({ setCards, activeCard, setOpenedModal }) {
+function DeleteCard({ dispatch,setCards, activeCard }) {
   const onDelete = (e) => {
     e.preventDefault();
     setCards((prevValue) =>
       prevValue.filter((card) => card.id != activeCard.id)
     );
-    setOpenedModal("");
+    dispatch({type:""})
   };
 
   return (
@@ -19,19 +19,19 @@ function DeleteCard({ setCards, activeCard, setOpenedModal }) {
         <button
           className="bg-red-600 w-3 h-3 rounded-full float-right my-0 me-5"
           onClick={() => {
-            setOpenedModal("");
+            dispatch({type:""})
           }}
         ></button>
       </div>
       <h1 className="text-3xl font-extrabold mb-5">DELETE CARD</h1>
       <label htmlFor="" className="text-zinc-600">
-        Are you sure you want to delete card “Card name”?
+        Are you sure you want to delete card “{activeCard.title}”?
       </label>
       <div className="flex justify-center h-[20%] items-center mt-[20px]">
         <button
           className="border border-zinc-300 py-2 px-5 rounded-[10px] font-bold hover:bg-[#DFDFDF]"
           onClick={() => {
-            setOpenedModal("");
+            dispatch({type:""})
           }}
         >
           Close

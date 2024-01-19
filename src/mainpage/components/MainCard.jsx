@@ -1,6 +1,6 @@
 import React from "react";
 
-function MainCard({ setActiveCard, card, setOpenedModal }) {
+function MainCard({ dispatch,setActiveCard, card }) {
   return (
     <div className="w-max-[560px] sm:h-max-[330px] border border-zinc-300 rounded-[5px] mx-[10px] my-[20px]">
       <div className="bg-[#E7E7E7] p-[30px] h-[80%]">
@@ -14,7 +14,7 @@ function MainCard({ setActiveCard, card, setOpenedModal }) {
           className="bg-yellow-400 py-2 px-5 rounded-[5px] font-bold hover:bg-yellow-500"
           onClick={() => {
             setActiveCard(card);
-            setOpenedModal("edit");
+            dispatch({type:"edit"})
           }}
         >
           Edit
@@ -23,7 +23,7 @@ function MainCard({ setActiveCard, card, setOpenedModal }) {
           className="bg-yellow-400 py-2 px-5 rounded-[5px] font-bold mx-2 hover:bg-yellow-500"
           onClick={() => {
             setActiveCard(card);
-            setOpenedModal("delete");
+            dispatch({type:"delete"})
           }}
         >
           Delete

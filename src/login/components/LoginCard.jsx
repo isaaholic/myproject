@@ -1,6 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
+import Context from "../../ContextWrapper";
 
-function LoginCard({ setAuthorized, email, setEmail }) {
+function LoginCard() {
+  const { email, setEmail, setAuthorized } = useContext(Context);
+
   const [isValid, setIsValid] = useState(false);
   const inputRef = useRef(null);
 
