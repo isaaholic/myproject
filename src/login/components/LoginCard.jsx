@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
-function LoginCard({setAuthorized,email,setEmail}) {
+function LoginCard({ setAuthorized, email, setEmail }) {
   const [isValid, setIsValid] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+    setIsValid(inputRef.current.value.includes("@"));
+  }, []);
+
   return (
     <form
       action=""
@@ -11,6 +18,7 @@ function LoginCard({setAuthorized,email,setEmail}) {
       <div className="flex flex-col">
         <label htmlFor="">Email:</label>
         <input
+          ref={inputRef}
           onChange={(e) => {
             setEmail(e.target.value);
             setIsValid(e.target.checkValidity());
@@ -18,7 +26,7 @@ function LoginCard({setAuthorized,email,setEmail}) {
           required
           value={email}
           type="email"
-          className="border border-zinc-300 rounded-[6px] my-2"
+          className="px-2 py-0.5 border border-zinc-300 rounded-[6px] my-2"
         />
       </div>
 

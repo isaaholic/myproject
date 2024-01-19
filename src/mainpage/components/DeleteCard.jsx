@@ -1,16 +1,25 @@
 import React from "react";
 
-function DeleteCard({ setIsOpenDelete }) {
+function DeleteCard({ setCards, activeCard, setOpenedModal }) {
+  const onDelete = (e) => {
+    e.preventDefault();
+    setCards((prevValue) =>
+      prevValue.filter((card) => card.id != activeCard.id)
+    );
+    setOpenedModal("");
+  };
+
   return (
     <form
       action=""
+      onSubmit={onDelete}
       className="flex flex-col items-center w-screen h-screen sm:w-[700px] sm:h-[200px] sm:mx-7 justify-center sm:rounded-[13px] bg-white"
     >
       <div className="w-[100%]">
         <button
           className="bg-red-600 w-3 h-3 rounded-full float-right my-0 me-5"
           onClick={() => {
-            setIsOpenDelete(false);
+            setOpenedModal("");
           }}
         ></button>
       </div>
@@ -22,12 +31,15 @@ function DeleteCard({ setIsOpenDelete }) {
         <button
           className="border border-zinc-300 py-2 px-5 rounded-[10px] font-bold hover:bg-[#DFDFDF]"
           onClick={() => {
-            setIsOpenDelete(false);
+            setOpenedModal("");
           }}
         >
           Close
         </button>
-        <button className="bg-yellow-400 py-2 px-5 rounded-[10px] font-bold mx-2 hover:bg-[#F6AB1A]">
+        <button
+          type="submit"
+          className="bg-yellow-400 py-2 px-5 rounded-[10px] font-bold mx-2 hover:bg-[#F6AB1A]"
+        >
           Delete
         </button>
       </div>
