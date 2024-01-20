@@ -13,7 +13,7 @@ const reducer = (state, action) => {
 export default function Mainpage() {
   const [state, dispatch] = useReducer(reducer, { modalState: "" });
 
-  const { email } = useContext(Context);
+  const { email, darkMode, setDarkMode } = useContext(Context);
 
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
@@ -30,15 +30,33 @@ export default function Mainpage() {
   };
 
   return (
-    <div className={`${state.modalState ? "overflow-hidden" : ""} h-screen`}>
+    <div
+      className={`${state.modalState ? "overflow-hidden" : ""} ${
+        darkMode ? "bg-slate-800 text-white" : ""
+      } h-screen`}
+    >
       <Navigation />
-      <button
-        name="create"
-        className="bg-yellow-400 py-3 px-10 font-bold rounded-[8px] hover:bg-yellow-500 ml-[28px] sm:ml-[68px] mt-[20px]"
-        onClick={handleClick}
-      >
-        Create card
-      </button>
+      <div className="flex items-center justify-between">
+        <button
+          name="create"
+          className={`${darkMode?"bg-slate-600 hover:bg-slate-700":"bg-yellow-400 hover:bg-yellow-500"} py-3 px-10 font-bold rounded-[8px]  mx-[14px] sm:ml-[68px] mt-[20px]`}
+          onClick={handleClick}
+        >
+          Create card
+        </button>
+        <button
+          onClick={() => {
+            setDarkMode((prevValue) => !prevValue);
+          }}
+          className={`${
+            darkMode
+              ? "bg-slate-100 text-black hover:bg-slate-200"
+              : "bg-slate-800 text-white hover:bg-slate-900"
+          } py-3 px-10 font-bold rounded-[8px] mx-[14px] sm:mr-[68px] mt-[20px]`}
+        >
+          {darkMode ? "Light Mode?" : "Dark Mode?"}
+        </button>
+      </div>
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 px-5 sm:px-[58px]">
         {filteredCards.length ? (
           filteredCards.map((card) => (

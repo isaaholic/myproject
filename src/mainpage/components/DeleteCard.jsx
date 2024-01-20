@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import Context from "../../ContextWrapper";
 
 function DeleteCard({ dispatch,setCards, activeCard }) {
+  const { darkMode } = useContext(Context);
+  
   const onDelete = (e) => {
     e.preventDefault();
     setCards((prevValue) =>
@@ -13,7 +16,9 @@ function DeleteCard({ dispatch,setCards, activeCard }) {
     <form
       action=""
       onSubmit={onDelete}
-      className="flex flex-col items-center w-screen h-screen sm:w-[700px] sm:h-[200px] sm:mx-7 justify-center sm:rounded-[13px] bg-white"
+      className={`${
+        darkMode ? "bg-slate-900" : "bg-white"
+      } flex flex-col items-center w-screen h-screen sm:w-[700px] sm:h-[200px] sm:mx-7 justify-center sm:rounded-[13px]`}
     >
       <div className="w-[100%]">
         <button
@@ -23,13 +28,19 @@ function DeleteCard({ dispatch,setCards, activeCard }) {
           }}
         ></button>
       </div>
-      <h1 className="text-3xl font-extrabold mb-5">DELETE CARD</h1>
-      <label htmlFor="" className="text-zinc-600">
+      <h1 className={`${
+          darkMode ? "text-slate-200" : ""
+        } text-3xl font-extrabold mb-5`}>DELETE CARD</h1>
+      <label htmlFor="" className={`${darkMode ? "text-slate-200" : "text-zinc-600"}`}>
         Are you sure you want to delete card “{activeCard.title}”?
       </label>
       <div className="flex justify-center h-[20%] items-center mt-[20px]">
         <button
-          className="border border-zinc-300 py-2 px-5 rounded-[10px] font-bold hover:bg-[#DFDFDF]"
+          className={`${
+            darkMode
+              ? "border border-slate-700 hover:bg-slate-800"
+              : "border border-zinc-300 hover:bg-[#DFDFDF]"
+          } py-2 px-5 rounded-[10px] font-bold `}
           onClick={() => {
             dispatch({type:""})
           }}
@@ -38,7 +49,11 @@ function DeleteCard({ dispatch,setCards, activeCard }) {
         </button>
         <button
           type="submit"
-          className="bg-yellow-400 py-2 px-5 rounded-[10px] font-bold mx-2 hover:bg-[#F6AB1A]"
+          className={`${
+            darkMode
+              ? "bg-slate-600 hover:bg-slate-700 text-white"
+              : "bg-yellow-400 hover:bg-yellow-500"
+          } py-2 px-5 rounded-[10px] font-bold ms-2`}
         >
           Delete
         </button>
