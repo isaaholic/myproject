@@ -7,7 +7,7 @@ export default Context;
 export const ContextWrapper = ({ children }) => {
   const [email, setEmail] = useState("");
   const [authorized, setAuthorized] = useState(false);
-  const [darkMode,setDarkMode] = useState(false);
+  const [darkMode,setDarkMode] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   const contextData = {
     email: email,
