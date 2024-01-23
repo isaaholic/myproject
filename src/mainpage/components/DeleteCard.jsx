@@ -1,15 +1,21 @@
 import React, { useContext } from "react";
 import Context from "../../ContextWrapper";
+import axios from "axios";
 
-function DeleteCard({ dispatch,setCards, activeCard }) {
+function DeleteCard({ dispatch, setCards, activeCard }) {
   const { darkMode } = useContext(Context);
-  
+
   const onDelete = (e) => {
     e.preventDefault();
-    setCards((prevValue) =>
-      prevValue.filter((card) => card.id != activeCard.id)
-    );
-    dispatch({type:""})
+    axios
+      .delete(`http://localhost:3000/cards/${activeCard._id}`)
+      .then((res) => {
+        axios.get(`http://localhost:3000/cards/${activeCard.author}`).then((res) => {
+          setCards(res.data);
+        });
+        dispatch({ type: "" });
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -24,14 +30,21 @@ function DeleteCard({ dispatch,setCards, activeCard }) {
         <button
           className="bg-red-600 w-3 h-3 rounded-full float-right my-0 me-5"
           onClick={() => {
-            dispatch({type:""})
+            dispatch({ type: "" });
           }}
         ></button>
       </div>
-      <h1 className={`${
+      <h1
+        className={`${
           darkMode ? "text-slate-200" : ""
-        } text-3xl font-extrabold mb-5`}>DELETE CARD</h1>
-      <label htmlFor="" className={`${darkMode ? "text-slate-200" : "text-zinc-600"}`}>
+        } text-3xl font-extrabold mb-5`}
+      >
+        DELETE CARD
+      </h1>
+      <label
+        htmlFor=""
+        className={`${darkMode ? "text-slate-200" : "text-zinc-600"}`}
+      >
         Are you sure you want to delete card “{activeCard.title}”?
       </label>
       <div className="flex justify-center h-[20%] items-center mt-[20px]">
@@ -42,7 +55,7 @@ function DeleteCard({ dispatch,setCards, activeCard }) {
               : "border border-zinc-300 hover:bg-[#DFDFDF]"
           } py-2 px-5 rounded-[10px] font-bold `}
           onClick={() => {
-            dispatch({type:""})
+            dispatch({ type: "" });
           }}
         >
           Close

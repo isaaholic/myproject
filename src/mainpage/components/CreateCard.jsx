@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 import Context from "../../ContextWrapper";
 
-function CreateCard({ email, setCards, dispatch }) {
-  const { darkMode } = useContext(Context);
+function CreateCard({ setCards, dispatch }) {
+  const { darkMode, email } = useContext(Context);
 
   const [formData, setFormData] = useState({});
 
@@ -20,8 +21,19 @@ function CreateCard({ email, setCards, dispatch }) {
 
   const createCard = (e) => {
     e.preventDefault();
-    setCards((prevValue) => [...prevValue, formData]);
-    dispatch({ type: "" });
+    axios
+      .post("http://localhost:3000/cards/", {
+        title: formData.title,
+        description: formData.description,
+        author: email,
+      })
+      .then((res) => {
+        axios.get(`http://localhost:3000/cards/${email}`).then((res) => {
+          setCards(res.data);
+        });
+        dispatch({ type: "" });
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
