@@ -12,7 +12,7 @@ export default Context;
 export const ContextWrapper = ({ children }) => {
   const [email, setEmail] = useState(sessionStorage.getItem("email"));
   const [authorized, setAuthorized] = useState(
-    sessionStorage.getItem("authorized")
+    JSON.parse(sessionStorage.getItem("authorized"))
   );
   const [darkMode, setDarkMode] = useState(
     window.matchMedia("(prefers-color-scheme: dark)").matches

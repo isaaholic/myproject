@@ -5,6 +5,7 @@ import Mainpage from "./mainpage/MainPage";
 
 const RequireAuth = () => {
   const { authorized } = useContext(Context);
+  
   return authorized ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
