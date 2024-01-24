@@ -1,12 +1,22 @@
-import { useContext } from "react";
 import Mainpage from "./mainpage/MainPage";
 import Login from "./login/Login";
-import Context from "./ContextWrapper";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import RequireAuth from "./RequireAuth";
+import Error from "./error/Error";
 
 function App() {
-  const { authorized } = useContext(Context);
+  return (
+    <Router>
+      <Routes>
+        <Route path={"login"} element={<Login />} />
+        <Route element={<RequireAuth />}>
+          <Route path="/" element={<Mainpage />} />
+        </Route>
 
-  return authorized ? <Mainpage /> : <Login />;
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

@@ -4,7 +4,7 @@ import axios from "axios";
 import Context from "../../ContextWrapper";
 
 function CreateCard({ setCards, dispatch }) {
-  const { darkMode, email } = useContext(Context);
+  const { darkMode, email,api } = useContext(Context);
 
   const [formData, setFormData] = useState({});
 
@@ -22,13 +22,13 @@ function CreateCard({ setCards, dispatch }) {
   const createCard = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/cards/", {
+      .post(`${api}/cards/`, {
         title: formData.title,
         description: formData.description,
         author: email,
       })
       .then((res) => {
-        axios.get(`http://localhost:3000/cards/${email}`).then((res) => {
+        axios.get(`${api}/cards/${email}`).then((res) => {
           setCards(res.data);
         });
         dispatch({ type: "" });

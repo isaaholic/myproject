@@ -3,14 +3,14 @@ import Context from "../../ContextWrapper";
 import axios from "axios";
 
 function DeleteCard({ dispatch, setCards, activeCard }) {
-  const { darkMode } = useContext(Context);
+  const { darkMode,api } = useContext(Context);
 
   const onDelete = (e) => {
     e.preventDefault();
     axios
-      .delete(`http://localhost:3000/cards/${activeCard._id}`)
+      .delete(`${api}/cards/${activeCard._id}`)
       .then((res) => {
-        axios.get(`http://localhost:3000/cards/${activeCard.author}`).then((res) => {
+        axios.get(`${api}/cards/${activeCard.author}`).then((res) => {
           setCards(res.data);
         });
         dispatch({ type: "" });

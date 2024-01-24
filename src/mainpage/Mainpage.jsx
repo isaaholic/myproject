@@ -1,5 +1,4 @@
-import { useContext, useEffect, useReducer, useState } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
 import Navigation from "./components/Navigation";
 import MainCard from "./components/MainCard";
 import CreateCard from "./components/CreateCard";
@@ -7,30 +6,10 @@ import EditCard from "./components/EditCard";
 import DeleteCard from "./components/DeleteCard";
 import Context from "../ContextWrapper";
 
-const reducer = (state, action) => {
-  return { modalState: (state.modalState = action.type) };
-};
-
 export default function Mainpage() {
-  const [state, dispatch] = useReducer(reducer, { modalState: "" });
+  const { email, darkMode, setDarkMode,api,state,dispatch,cards,setCards } = useContext(Context);
 
-  const { email, darkMode, setDarkMode } = useContext(Context);
-
-  const [cards, setCards] = useState([]);
-  const [filteredCards, setFilteredCards] = useState([]);
   const [activeCard, setActiveCard] = useState();
-
-  useEffect(() => {
-    setFilteredCards(cards.filter((card) => card.author === email));
-  }, [cards]);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/cards/${email}`)
-      .then((res) => {
-        setCards(res.data);
-      });
-  }, []);
 
   const handleClick = (e) => {
     const { name } = e.target;
@@ -71,11 +50,11 @@ export default function Mainpage() {
         </button>
       </div>
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 px-5 sm:px-[58px]">
-        {filteredCards.length ? (
-          filteredCards.map((card) => (
+        {cards.length ? (
+          cards.map((card,key) => (
             <MainCard
               dispatch={dispatch}
-              key={card.id}
+              key={key}
               card={card}
               setActiveCard={setActiveCard}
             />

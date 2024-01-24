@@ -1,8 +1,11 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import Context from "../../ContextWrapper";
+import { useNavigate } from 'react-router-dom';
 
 function LoginCard() {
   const { email, setEmail, setAuthorized, darkMode } = useContext(Context);
+
+  const navigate = useNavigate();
 
   const [isValid, setIsValid] = useState(false);
   const inputRef = useRef(null);
@@ -51,6 +54,7 @@ function LoginCard() {
       <button
         onClick={() => {
           isValid ? setAuthorized(true) : null;
+          navigate('/')
         }}
         className={`${
           isValid

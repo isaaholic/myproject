@@ -3,7 +3,7 @@ import Context from "../../ContextWrapper";
 import axios from "axios";
 
 function EditCard({ dispatch, setCards, activeCard }) {
-  const { darkMode } = useContext(Context);
+  const { darkMode,api } = useContext(Context);
 
   const [formData, setFormData] = useState({});
 
@@ -19,12 +19,12 @@ function EditCard({ dispatch, setCards, activeCard }) {
   const onUpdate = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:3000/cards/${activeCard._id}`, {
+      .put(`${api}/cards/${activeCard._id}`, {
         title: formData.title,
         description: formData.description,
       })
       .then((res) => {
-        axios.get(`http://localhost:3000/cards/${activeCard.author}`).then((res) => {
+        axios.get(`${api}/cards/${activeCard.author}`).then((res) => {
           setCards(res.data);
         });
         dispatch({ type: "" });
