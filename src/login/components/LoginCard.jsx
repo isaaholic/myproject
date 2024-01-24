@@ -54,7 +54,7 @@ function LoginCard() {
       <button
         onClick={() => {
           isValid ? setAuthorized(true) : null;
-          navigate('/')
+          navigate(`/${email}`)
         }}
         className={`${
           isValid

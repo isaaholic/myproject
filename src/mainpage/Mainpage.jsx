@@ -5,9 +5,13 @@ import CreateCard from "./components/CreateCard";
 import EditCard from "./components/EditCard";
 import DeleteCard from "./components/DeleteCard";
 import Context from "../ContextWrapper";
+import { useParams } from "react-router-dom";
 
 export default function Mainpage() {
-  const { email, darkMode, setDarkMode,api,state,dispatch,cards,setCards } = useContext(Context);
+  const { darkMode, setDarkMode, api, state, dispatch, cards, setCards } =
+    useContext(Context);
+
+  const { email } = useParams();
 
   const [activeCard, setActiveCard] = useState();
 
@@ -49,9 +53,12 @@ export default function Mainpage() {
           {darkMode ? "Light Mode?" : "Dark Mode?"}
         </button>
       </div>
+      <div className="flex justify-center my-5 mx-[14px]">
+        <p>Route Email: {email}</p>
+      </div>
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 px-5 sm:px-[58px]">
         {cards.length ? (
-          cards.map((card,key) => (
+          cards.map((card, key) => (
             <MainCard
               dispatch={dispatch}
               key={key}

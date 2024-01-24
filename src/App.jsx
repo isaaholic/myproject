@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<RequireAuth />}>
           <Route path="" element={<Mainpage />} />
+          <Route path=":email" element={<Mainpage />} />
           <Route path="login" element={<Login />} />
         </Route>
 
